@@ -1,0 +1,239 @@
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Estilos del encabezado */
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 250px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 20px;
+    z-index: 1000;
+}
+
+
+/* Logo dentro del menú */
+.menu-lateral .logo img {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+/* Estilos del menú */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.menu ul li {
+    margin: 20px 0;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* Para dispositivos pequeños (móviles), el menú pasa a estar en la parte superior */
+@media (max-width: 575px) {
+    .menu-lateral {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        padding: 10px 20px;
+        position: static; /* Se vuelve estático y ya no es fijo */
+    }
+
+    .menu-lateral .logo img {
+        width: 100px;
+    }
+
+    .menu ul {
+        display: flex;
+        gap: 10px;
+    }
+
+    .menu ul li {
+        margin: 0;
+    }
+
+    .menu ul li a {
+        font-size: 16px;
+    }
+}
+
+/* Asegura que el contenido principal no quede detrás del menú en pantallas grandes */
+main {
+    margin-left: 250px;
+}
+
+/* En pantallas pequeñas, el margen desaparece */
+@media (max-width: 575px) {
+    main {
+        margin-left: 0;
+    }
+}
+
+
+/* Estilos del contenido principal */
+main {
+    padding: 2rem;
+}
+
+/* Sección de galería */
+.galeria-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas para pantallas grandes */
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Adaptabilidad para pantallas más pequeñas */
+@media (max-width: 575px) {
+    .galeria-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en pantallas medianas */
+    }
+}
+
+@media (max-width: 575px) {
+    .galeria-container {
+        grid-template-columns: 1fr; /* 1 columna en pantallas pequeñas */
+    }
+}
+
+/* Estilos de las piezas (contenedor de cada imagen) */
+.pieza {
+    position: relative;
+    overflow: hidden;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    height: 200px; /* Altura fija para mantener la proporción */
+    margin: 0 auto; /* Centra el contenedor */
+}
+
+/* Contenedor de la imagen */
+.imagen-container {
+    position: absolute;
+    width: 100%;
+    height: 100%; /* Ajusta a 100% para que ocupe todo el espacio */
+    transform-style: preserve-3d;
+    transition: transform 1s ease; /* Animación suave */
+    animation: spin-on-load 2s ease-in-out; /* Animación de giro al cargar */
+    
+  
+}
+
+.imagen-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ajusta la imagen sin distorsión */
+    backface-visibility: hidden; /* Oculta la parte trasera al girar */
+    border-radius: 10px;
+
+   
+}
+
+.front {
+    transform: rotateY(0deg); /* Imagen frontal */
+}
+
+.back {
+    transform: rotateY(90deg); /* Imagen trasera */
+}
+
+/* Efecto al pasar el cursor */
+.pieza:hover .imagen-container {
+    transform: rotateY(360deg); /* Rota 360 grados al pasar el cursor */
+    transition: transform 1s ease; /* Tiempo de transición */
+    animation: assemble 0.5s forwards; /* Llama a la animación al pasar el mouse */
+
+    background-size: cover; /* Cubre toda el área del header */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    padding: 1rem;
+    height: 300px; /* Ajusta la altura del header */  
+}
+
+/* Animación de giro al cargar la página */
+@keyframes spin-on-load {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes assemble {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1) rotate(15deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+/* Estilos para asegurar que las imágenes no se desborden */
+.pieza img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para cubrir el contenedor sin distorsión */
+}
+
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer .social-icons a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer .social-icons a:hover {
+    color: #ffcc00; /* Cambia el color al pasar el mouse */
+}
+
+@media (max-width: 575px) {
+    .footer {
+        text-align: center;
+    }
+}
+
+
+
